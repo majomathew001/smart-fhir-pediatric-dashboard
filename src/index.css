@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html, body {
+    @apply bg-slate-50 text-slate-800 font-sans m-0 min-h-screen;
+  }
+
+  body {
+    display: block;
+    min-width: 320px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+@media (prefers-reduced-motion) {
+  *, ::before, ::after { animation: none !important; transition: none !important; }
+}
