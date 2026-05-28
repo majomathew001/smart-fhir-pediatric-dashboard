@@ -4,6 +4,7 @@ import { RiskBadge } from "../components/RiskBadge";
 import { ObservationCharts } from "./ObservationCharts";
 import { ClinicalInsightsPanel } from "../components/ClinicalInsightsPanel";
 import { BmiTrendChart } from "../components/Charts/BmiTrendChart";
+import { PatientInsightCard } from "../components/PatientInsightCard";
 
 type Tab = "overview" | "insights" | "observations" | "encounters" | "notes";
 
@@ -170,6 +171,11 @@ export function PatientDetail({ patientId, onBack }: PatientDetailProps) {
           {/* Overview tab */}
           {activeTab === "overview" && (
             <div className="space-y-4">
+              <PatientInsightCard
+                patientName={patient.fullName}
+                bmi={patient.bmi}
+                riskCategory={patient.riskCategory}
+              />
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Demographics</h4>
