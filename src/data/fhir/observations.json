@@ -1,0 +1,392 @@
+{
+  "resourceType": "Bundle",
+  "type": "searchset",
+  "total": 35,
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-001-01",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2024-05-10T10:00:00Z",
+        "valueQuantity": { "value": 19.2, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-001-02",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2024-08-14T10:00:00Z",
+        "valueQuantity": { "value": 20.1, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-001-03",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2024-11-08T10:00:00Z",
+        "valueQuantity": { "value": 21.0, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-001-04",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-02-22T10:00:00Z",
+        "valueQuantity": { "value": 21.8, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-001-05",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-05-22T10:00:00Z",
+        "valueQuantity": { "value": 22.3, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-001-06",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-08-14T10:00:00Z",
+        "valueQuantity": { "value": 22.9, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-001-07",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-11-14T10:00:00Z",
+        "valueQuantity": { "value": 23.1, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-001-08",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2026-02-10T10:00:00Z",
+        "valueQuantity": { "value": 23.4, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-wt-001-01",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "29463-7", "display": "Body weight" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2024-05-10T10:00:00Z",
+        "valueQuantity": { "value": 32.0, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-wt-001-02",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "29463-7", "display": "Body weight" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2024-08-14T10:00:00Z",
+        "valueQuantity": { "value": 33.5, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-wt-001-03",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "29463-7", "display": "Body weight" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2024-11-08T10:00:00Z",
+        "valueQuantity": { "value": 35.0, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-wt-001-04",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "29463-7", "display": "Body weight" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-02-22T10:00:00Z",
+        "valueQuantity": { "value": 36.2, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-wt-001-05",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "29463-7", "display": "Body weight" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-05-22T10:00:00Z",
+        "valueQuantity": { "value": 37.5, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-wt-001-06",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "29463-7", "display": "Body weight" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-08-14T10:00:00Z",
+        "valueQuantity": { "value": 38.8, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-wt-001-07",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "29463-7", "display": "Body weight" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-11-14T10:00:00Z",
+        "valueQuantity": { "value": 39.9, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-wt-001-08",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "29463-7", "display": "Body weight" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2026-02-10T10:00:00Z",
+        "valueQuantity": { "value": 41.0, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-ht-001-01",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "8302-2", "display": "Body height" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2024-05-10T10:00:00Z",
+        "valueQuantity": { "value": 129, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-ht-001-02",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "8302-2", "display": "Body height" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2024-08-14T10:00:00Z",
+        "valueQuantity": { "value": 131, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-ht-001-03",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "8302-2", "display": "Body height" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2024-11-08T10:00:00Z",
+        "valueQuantity": { "value": 132, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-ht-001-04",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "8302-2", "display": "Body height" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-02-22T10:00:00Z",
+        "valueQuantity": { "value": 133, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-ht-001-05",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "8302-2", "display": "Body height" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-05-22T10:00:00Z",
+        "valueQuantity": { "value": 135, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-ht-001-06",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "8302-2", "display": "Body height" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-08-14T10:00:00Z",
+        "valueQuantity": { "value": 137, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-ht-001-07",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "8302-2", "display": "Body height" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2025-11-14T10:00:00Z",
+        "valueQuantity": { "value": 138, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-ht-001-08",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "8302-2", "display": "Body height" }] },
+        "subject": { "reference": "Patient/pt-001" },
+        "effectiveDateTime": "2026-02-10T10:00:00Z",
+        "valueQuantity": { "value": 140, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-002",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-002" },
+        "effectiveDateTime": "2026-05-15T10:00:00Z",
+        "valueQuantity": { "value": 19.1, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-003",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-003" },
+        "effectiveDateTime": "2026-04-28T10:00:00Z",
+        "valueQuantity": { "value": 16.8, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-004",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-004" },
+        "effectiveDateTime": "2026-05-20T10:00:00Z",
+        "valueQuantity": { "value": 24.7, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-005",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-005" },
+        "effectiveDateTime": "2026-05-02T10:00:00Z",
+        "valueQuantity": { "value": 17.2, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-006",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-006" },
+        "effectiveDateTime": "2026-05-18T10:00:00Z",
+        "valueQuantity": { "value": 21.0, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-007",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-007" },
+        "effectiveDateTime": "2026-05-12T10:00:00Z",
+        "valueQuantity": { "value": 25.3, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-008",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-008" },
+        "effectiveDateTime": "2026-04-22T10:00:00Z",
+        "valueQuantity": { "value": 15.9, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-009",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-009" },
+        "effectiveDateTime": "2026-05-05T10:00:00Z",
+        "valueQuantity": { "value": 20.5, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-010",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-010" },
+        "effectiveDateTime": "2026-05-22T10:00:00Z",
+        "valueQuantity": { "value": 22.8, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-011",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-011" },
+        "effectiveDateTime": "2026-05-08T10:00:00Z",
+        "valueQuantity": { "value": 15.4, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bmi-012",
+        "status": "final",
+        "code": { "coding": [{ "system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI)" }] },
+        "subject": { "reference": "Patient/pt-012" },
+        "effectiveDateTime": "2026-05-14T10:00:00Z",
+        "valueQuantity": { "value": 26.1, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2" }
+      }
+    }
+  ]
+}

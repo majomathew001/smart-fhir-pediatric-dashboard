@@ -1,0 +1,127 @@
+{
+  "resourceType": "Bundle",
+  "type": "searchset",
+  "total": 12,
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-001",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100123" }],
+        "name": [{ "family": "Thompson", "given": ["Aiden"] }],
+        "gender": "male",
+        "birthDate": "2014-03-12"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-002",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100124" }],
+        "name": [{ "family": "Martinez", "given": ["Sofia"] }],
+        "gender": "female",
+        "birthDate": "2016-07-22"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-003",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100125" }],
+        "name": [{ "family": "Johnson", "given": ["Liam"] }],
+        "gender": "male",
+        "birthDate": "2013-11-05"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-004",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100126" }],
+        "name": [{ "family": "Davis", "given": ["Emma"] }],
+        "gender": "female",
+        "birthDate": "2018-01-30"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-005",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100127" }],
+        "name": [{ "family": "Wilson", "given": ["Noah"] }],
+        "gender": "male",
+        "birthDate": "2015-09-14"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-006",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100128" }],
+        "name": [{ "family": "Brown", "given": ["Olivia"] }],
+        "gender": "female",
+        "birthDate": "2012-06-18"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-007",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100129" }],
+        "name": [{ "family": "Garcia", "given": ["Mason"] }],
+        "gender": "male",
+        "birthDate": "2017-04-02"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-008",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100130" }],
+        "name": [{ "family": "Anderson", "given": ["Ava"] }],
+        "gender": "female",
+        "birthDate": "2014-12-25"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-009",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100131" }],
+        "name": [{ "family": "Taylor", "given": ["Ethan"] }],
+        "gender": "male",
+        "birthDate": "2016-02-08"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-010",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100132" }],
+        "name": [{ "family": "White", "given": ["Isabella"] }],
+        "gender": "female",
+        "birthDate": "2013-08-19"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-011",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100133" }],
+        "name": [{ "family": "Harris", "given": ["James"] }],
+        "gender": "male",
+        "birthDate": "2018-05-30"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pt-012",
+        "identifier": [{ "system": "http://hospital.example/mrn", "value": "MRN-100134" }],
+        "name": [{ "family": "Lewis", "given": ["Charlotte"] }],
+        "gender": "female",
+        "birthDate": "2011-10-11"
+      }
+    }
+  ]
+}

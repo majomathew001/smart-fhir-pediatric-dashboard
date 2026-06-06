@@ -2,36 +2,99 @@
  * FHIR Service Layer
  *
  * Provides a typed interface over the FHIR proxy at /fhir/*.
- * All requests are authenticated server-side via the Bun proxy in src/index.ts.
- * Swap the BASE_URL to point at a live SMART on FHIR endpoint when ready.
+ * Falls back to bundled local FHIR sample data when the API is unavailable.
  */
 
-import type { FhirBundle, FhirPatient, FhirObservation, PatientSummary, ObservationPoint, RiskCategory } from "../types/fhir";
+import type {
+  FhirBundle,
+  FhirPatient,
+  FhirObservation,
+  PatientSummary,
+  PatientDetail,
+  ObservationPoint,
+  RiskCategory,
+  DashboardStats,
+} from "../types/fhir";
+import { getDemoFhirData, getDemoEncounters } from "./demoFhirData";
 
 const BASE = "/fhir";
 
+let demoModeActive = false;
+
+export function isDemoMode(): boolean {
+  return demoModeActive;
+}
+
+function activateDemoMode() {
+  demoModeActive = true;
+}
+
 async function fhirGet<T>(path: string): Promise<T> {
-  const res = await fetch(`${BASE}/${path}`);
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(`FHIR request failed (${res.status}): ${body.slice(0, 200)}`);
+  if (demoModeActive) {
+    return getDemoFhirData<T>(path);
   }
-  return res.json() as Promise<T>;
+
+  try {
+    const res = await fetch(`${BASE}/${path}`);
+    if (res.headers.get("X-Demo-Mode") === "true") {
+      activateDemoMode();
+    }
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`FHIR request failed (${res.status}): ${body.slice(0, 200)}`);
+    }
+    return res.json() as Promise<T>;
+  } catch {
+    activateDemoMode();
+    return getDemoFhirData<T>(path);
+  }
 }
 
 // ── Patient ──────────────────────────────────────────────────────────────────
 
 export async function fetchPatients(): Promise<PatientSummary[]> {
   const bundle = await fhirGet<FhirBundle<FhirPatient>>("Patient");
-  return (bundle.entry ?? [])
+  const summaries = (bundle.entry ?? [])
     .map(e => e.resource)
     .filter((r): r is FhirPatient => r?.resourceType === "Patient")
     .map(fhirPatientToSummary);
+
+  return Promise.all(summaries.map(enrichWithBmi));
 }
 
 export async function fetchPatient(id: string): Promise<PatientSummary> {
   const patient = await fhirGet<FhirPatient>(`Patient/${id}`);
-  return fhirPatientToSummary(patient);
+  return enrichWithBmi(fhirPatientToSummary(patient));
+}
+
+export async function fetchPatientDetail(id: string): Promise<PatientDetail> {
+  const [summary, bmiTrend, weightTrend, heightTrend] = await Promise.all([
+    fetchPatient(id),
+    fetchBmiTrend(id),
+    fetchWeightTrend(id),
+    fetchHeightTrend(id),
+  ]);
+
+  const latestBmi = bmiTrend.at(-1)?.value ?? null;
+
+  return {
+    ...summary,
+    bmi: latestBmi ?? summary.bmi,
+    riskCategory: latestBmi != null ? bmiRiskCategory(latestBmi, summary.age) : summary.riskCategory,
+    bmiTrend,
+    weightTrend,
+    heightTrend,
+    encounters: getDemoEncounters(id),
+  };
+}
+
+export function computeDashboardStats(patients: PatientSummary[]): DashboardStats {
+  return {
+    total: patients.length,
+    highRisk: patients.filter(p => p.riskCategory === "high-risk").length,
+    overweight: patients.filter(p => p.riskCategory === "overweight").length,
+    normal: patients.filter(p => p.riskCategory === "normal").length,
+  };
 }
 
 // ── Observations ─────────────────────────────────────────────────────────────
@@ -64,6 +127,21 @@ export const fetchWeightTrend = (id: string) => fetchObservations(id, LOINC.WEIG
 export const fetchHeightTrend = (id: string) => fetchObservations(id, LOINC.HEIGHT);
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
+
+async function enrichWithBmi(summary: PatientSummary): Promise<PatientSummary> {
+  const bmiTrend = await fetchObservations(summary.id, LOINC.BMI);
+  const latest = bmiTrend.at(-1);
+  if (!latest) return summary;
+
+  const lastVisit = latest.date.length === 7 ? `${latest.date}-15` : latest.date.slice(0, 10);
+
+  return {
+    ...summary,
+    bmi: latest.value,
+    riskCategory: bmiRiskCategory(latest.value, summary.age),
+    lastVisit,
+  };
+}
 
 function fhirPatientToSummary(p: FhirPatient): PatientSummary {
   const name = p.name?.[0];

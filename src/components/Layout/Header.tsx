@@ -1,13 +1,19 @@
+import { DemoModeBadge } from "../DemoModeBadge";
+
 interface HeaderProps {
   title: string;
   onSearch?: (q: string) => void;
   searchPlaceholder?: string;
+  demoMode?: boolean;
 }
 
-export function Header({ title, onSearch, searchPlaceholder = "Search patients…" }: HeaderProps) {
+export function Header({ title, onSearch, searchPlaceholder = "Search patients…", demoMode }: HeaderProps) {
   return (
     <header className="bg-white border-b border-slate-200 px-6 py-3.5 flex items-center justify-between gap-4 sticky top-0 z-10">
-      <h1 className="text-base font-semibold text-slate-800 truncate shrink-0">{title}</h1>
+      <div className="flex items-center gap-2.5 min-w-0">
+        <h1 className="text-base font-semibold text-slate-800 truncate shrink-0">{title}</h1>
+        {demoMode && <DemoModeBadge />}
+      </div>
 
       <div className="flex items-center gap-3 ml-auto">
         {/* Search */}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 
 import { Layout } from "./components/Layout/Layout";
@@ -6,7 +6,10 @@ import { Dashboard } from "./pages/Dashboard";
 import { PatientList } from "./pages/PatientList";
 import { PatientDetail } from "./pages/PatientDetail";
 import { ObservationCharts } from "./pages/ObservationCharts";
-import { mockAlerts, mockPatientDetail } from "./data/mockPatients";
+import { mockAlerts } from "./data/mockPatients";
+import { FhirDataProvider, useFhirData } from "./context/FhirDataContext";
+import type { ObservationPoint } from "./types/fhir";
+import { fetchBmiTrend, fetchWeightTrend, fetchHeightTrend } from "./api/fhirService";
 
 type Page = "dashboard" | "patients" | "detail" | "charts" | "alerts";
 
@@ -18,9 +21,10 @@ const PAGE_TITLES: Record<Page, string> = {
   alerts: "Risk Alerts",
 };
 
-export function App() {
+function AppContent() {
   const [page, setPage] = useState<Page>("dashboard");
   const [selectedPatient, setSelectedPatient] = useState<string>("pt-001");
+  const { demoMode } = useFhirData();
 
   function navigate(target: string, patientId?: string) {
     if (patientId) setSelectedPatient(patientId);
@@ -33,6 +37,7 @@ export function App() {
       onNavigate={p => setPage(p as Page)}
       pageTitle={PAGE_TITLES[page]}
       onSearch={undefined}
+      demoMode={demoMode}
     >
       {page === "dashboard" && <Dashboard onNavigate={navigate} />}
 
@@ -48,16 +53,67 @@ export function App() {
       )}
 
       {page === "charts" && (
-        <ObservationCharts
-          bmiTrend={mockPatientDetail.bmiTrend}
-          weightTrend={mockPatientDetail.weightTrend}
-          heightTrend={mockPatientDetail.heightTrend}
-          standalone
-        />
+        <ChartsPage patientId={selectedPatient} />
       )}
 
       {page === "alerts" && <AlertsPage onViewPatient={id => navigate("detail", id)} />}
     </Layout>
+  );
+}
+
+function ChartsPage({ patientId }: { patientId: string }) {
+  const [bmiTrend, setBmiTrend] = useState<ObservationPoint[]>([]);
+  const [weightTrend, setWeightTrend] = useState<ObservationPoint[]>([]);
+  const [heightTrend, setHeightTrend] = useState<ObservationPoint[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+
+    Promise.all([
+      fetchBmiTrend(patientId),
+      fetchWeightTrend(patientId),
+      fetchHeightTrend(patientId),
+    ])
+      .then(([bmi, weight, height]) => {
+        if (!cancelled) {
+          setBmiTrend(bmi);
+          setWeightTrend(weight);
+          setHeightTrend(height);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => { cancelled = true; };
+  }, [patientId]);
+
+  if (loading) {
+    return (
+      <div className="space-y-5 max-w-5xl animate-pulse">
+        <div className="h-8 bg-slate-200 rounded w-48" />
+        <div className="h-64 bg-slate-200 rounded-xl" />
+      </div>
+    );
+  }
+
+  return (
+    <ObservationCharts
+      bmiTrend={bmiTrend}
+      weightTrend={weightTrend}
+      heightTrend={heightTrend}
+      standalone
+    />
+  );
+}
+
+export function App() {
+  return (
+    <FhirDataProvider>
+      <AppContent />
+    </FhirDataProvider>
   );
 }
 

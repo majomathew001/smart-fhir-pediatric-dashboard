@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
-import { mockDashboardStats, mockAlerts, mockPatients } from "../data/mockPatients";
+import type { PatientSummary } from "../types/fhir";
+import { mockAlerts } from "../data/mockPatients";
+import { computeDashboardStats } from "../api/fhirService";
 import { RiskBadge } from "../components/RiskBadge";
+import { useFhirData } from "../context/FhirDataContext";
 
 // ── Stat Card ──────────────────────────────────────────────────────────────────
 
@@ -58,6 +61,19 @@ function AlertRow({ alert, onViewPatient }: { alert: typeof mockAlerts[0]; onVie
   );
 }
 
+function LoadingSkeleton() {
+  return (
+    <div className="space-y-6 max-w-6xl animate-pulse">
+      <div className="h-12 bg-slate-200 rounded-lg w-1/3" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="h-24 bg-slate-200 rounded-xl" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Main Dashboard ─────────────────────────────────────────────────────────────
 
 interface DashboardProps {
@@ -65,7 +81,18 @@ interface DashboardProps {
 }
 
 export function Dashboard({ onNavigate }: DashboardProps) {
-  const stats = mockDashboardStats;
+  const { patients, loading, error } = useFhirData();
+  const stats = computeDashboardStats(patients);
+
+  if (loading) return <LoadingSkeleton />;
+
+  if (error) {
+    return (
+      <div className="bg-red-50 border border-red-200 rounded-xl px-5 py-4 text-sm text-red-700 max-w-6xl">
+        Failed to load dashboard data: {error}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6 max-w-6xl">
@@ -221,7 +248,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
           </button>
         </div>
         <div className="divide-y divide-slate-100">
-          {mockPatients.slice(0, 5).map(p => (
+          {patients.slice(0, 5).map((p: PatientSummary) => (
             <div
               key={p.id}
               className="flex items-center justify-between px-5 py-3 hover:bg-slate-50 transition-colors cursor-pointer"

@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { mockPatientDetail, mockPatients } from "../data/mockPatients";
+import { useEffect, useState } from "react";
+import type { PatientDetail as PatientDetailType } from "../types/fhir";
 import { RiskBadge } from "../components/RiskBadge";
 import { ObservationCharts } from "./ObservationCharts";
 import { ClinicalInsightsPanel } from "../components/ClinicalInsightsPanel";
 import { BmiTrendChart } from "../components/Charts/BmiTrendChart";
 import { PatientInsightCard } from "../components/PatientInsightCard";
+import { useFhirData } from "../context/FhirDataContext";
 
 type Tab = "overview" | "insights" | "observations" | "encounters" | "notes";
 
@@ -15,11 +16,62 @@ interface PatientDetailProps {
 
 export function PatientDetail({ patientId, onBack }: PatientDetailProps) {
   const [activeTab, setActiveTab] = useState<Tab>("overview");
+  const [patient, setPatient] = useState<PatientDetailType | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const { getPatientDetail } = useFhirData();
 
-  // Use mock detail data (in production: fetch by id)
-  const patient = patientId === "pt-001"
-    ? mockPatientDetail
-    : { ...mockPatientDetail, ...mockPatients.find(p => p.id === patientId), bmiTrend: mockPatientDetail.bmiTrend, weightTrend: mockPatientDetail.weightTrend, heightTrend: mockPatientDetail.heightTrend, encounters: mockPatientDetail.encounters };
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+
+    getPatientDetail(patientId)
+      .then(data => {
+        if (!cancelled) setPatient(data);
+      })
+      .catch(err => {
+        if (!cancelled) setError(err instanceof Error ? err.message : "Failed to load patient");
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => { cancelled = true; };
+  }, [patientId, getPatientDetail]);
+
+  if (loading) {
+    return (
+      <div className="space-y-5 max-w-5xl animate-pulse">
+        <div className="h-6 bg-slate-200 rounded w-48" />
+        <div className="h-32 bg-slate-200 rounded-xl" />
+        <div className="grid grid-cols-4 gap-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="h-24 bg-slate-200 rounded-xl" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !patient) {
+    return (
+      <div className="space-y-4 max-w-5xl">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-800 transition-colors"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Patient List
+        </button>
+        <div className="bg-red-50 border border-red-200 rounded-xl px-5 py-4 text-sm text-red-700">
+          {error ?? "Patient not found"}
+        </div>
+      </div>
+    );
+  }
 
   const latestBmi = patient.bmiTrend.at(-1);
   const latestWeight = patient.weightTrend.at(-1);

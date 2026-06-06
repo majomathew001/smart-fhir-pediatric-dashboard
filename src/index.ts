@@ -1,19 +1,26 @@
 import { serve } from "bun";
 import index from "./index.html";
+import { getDemoFhirData } from "./api/demoFhirData";
 
 const FHIR_BASE_URL = process.env.FHIR_BASE_URL?.replace(/\/$/, "");
 const BEARER_TOKEN = process.env.BEARER_TOKEN;
 
-async function proxyFhir(req: Request & { params: Record<string, string> }): Promise<Response> {
-  if (!FHIR_BASE_URL || !BEARER_TOKEN) {
-    return Response.json(
-      { error: "FHIR_BASE_URL and BEARER_TOKEN must be set" },
-      { status: 500 },
-    );
-  }
+function demoResponse(path: string): Response {
+  const data = getDemoFhirData(path);
+  return Response.json(data, {
+    headers: { "X-Demo-Mode": "true" },
+  });
+}
 
+async function proxyFhir(req: Request & { params: Record<string, string> }): Promise<Response> {
   const url = new URL(req.url);
   const path = url.pathname.replace(/^\/fhir\/?/, "");
+  const fhirPath = `${path}${url.search}`;
+
+  if (!FHIR_BASE_URL || !BEARER_TOKEN) {
+    return demoResponse(fhirPath);
+  }
+
   const targetUrl = `${FHIR_BASE_URL}${path ? `/${path}` : ""}${url.search}`;
 
   const headers = new Headers(req.headers);
@@ -21,22 +28,35 @@ async function proxyFhir(req: Request & { params: Record<string, string> }): Pro
   headers.delete("host");
   headers.delete("accept-encoding");
 
-  const response = await fetch(targetUrl, {
-    method: req.method,
-    headers,
-    body: req.method === "GET" || req.method === "HEAD" ? undefined : req.body,
-  });
+  try {
+    const response = await fetch(targetUrl, {
+      method: req.method,
+      headers,
+      body: req.method === "GET" || req.method === "HEAD" ? undefined : req.body,
+    });
 
-  const body = await response.arrayBuffer();
-  const responseHeaders = new Headers(response.headers);
-  responseHeaders.delete("content-encoding");
-  responseHeaders.delete("content-length");
+    if (response.status >= 500) {
+      return demoResponse(fhirPath);
+    }
 
-  return new Response(body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers: responseHeaders,
-  });
+    if (!response.ok) {
+      const body = await response.arrayBuffer();
+      return new Response(body, { status: response.status, statusText: response.statusText });
+    }
+
+    const body = await response.arrayBuffer();
+    const responseHeaders = new Headers(response.headers);
+    responseHeaders.delete("content-encoding");
+    responseHeaders.delete("content-length");
+
+    return new Response(body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: responseHeaders,
+    });
+  } catch {
+    return demoResponse(fhirPath);
+  }
 }
 
 const server = serve({

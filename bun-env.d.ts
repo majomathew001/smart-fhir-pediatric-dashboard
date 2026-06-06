@@ -10,6 +10,11 @@ declare module "*.svg" {
 
 declare module "*.css" {}
 
+declare module "*.json" {
+  const value: unknown;
+  export default value;
+}
+
 declare module "*.module.css" {
   /**
    * A record of class names to their corresponding CSS module classes
